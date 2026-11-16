@@ -1,23 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Check, FileText, ScanLine, Sparkles, ShieldCheck, LockKeyhole, CircleCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ResumeShell, IntegrityNote } from "@/components/resume-shell";
+import heroImage from "@/assets/resume-studio.jpg";
 export const Route = createFileRoute("/")({
+  head: () => ({ meta: [{title: "ATS Resume Optimizer — Seu próximo passo começa aqui"}, {name: "description", content: "Compare seu currículo com a vaga e prepare uma versão ATS friendly, preservando sua história profissional."}, {property: "og:title", content: "ATS Resume Optimizer — Seu próximo passo começa aqui"}, {property: "og:description", content: "Seu currículo mais claro, alinhado e fiel à sua experiência."}, {property: "og:type", content: "website"}, {name: "twitter:card", content: "summary_large_image"}] }),
   component: Index,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+ return <ResumeShell><main><section className="hero"><img src={heroImage} width={1536} height={1024} className="hero-image" alt="Currículo com marca de verificação e detalhes em azul"/><div className="page-width hero-content"><span className="eyebrow"><Sparkles size={13}/> SUA PRÓXIMA OPORTUNIDADE COMEÇA AQUI</span><h1 className="mt-6">ATS Resume<br/><span className="text-primary">Optimizer.</span></h1><p className="hero-copy mt-5">Sua experiência merece ser vista. Alinhe seu currículo à vaga e dê o próximo passo com mais confiança.</p><div className="mt-7 flex items-center gap-4"><Button className="hero-action" asChild><Link to="/analise">Começar análise <ArrowRight/></Link></Button><span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Check size={15} className="text-success"/> Grátis, sem cadastro</span></div><p className="mt-5 flex items-center gap-2 text-[11px] text-muted-foreground"><ShieldCheck size={14}/> Mais clareza no currículo. A mesma história profissional.</p></div></section><section className="trust-strip"><div className="page-width grid grid-cols-3 gap-3 py-5"><div className="trust-item"><ScanLine size={18} className="text-primary"/> Compatível com ATS</div><div className="trust-item"><LockKeyhole size={18} className="text-primary"/> Seus dados protegidos</div><div className="trust-item"><CircleCheck size={18} className="text-success"/> Sem informações inventadas</div></div></section><section id="como-funciona" className="page-width py-12"><div className="text-center"><p className="mb-2 text-[10px] font-bold tracking-widest text-primary">SIMPLES, DO INÍCIO AO PRÓXIMO PASSO</p><h2 className="section-title">Um currículo melhor em três etapas</h2><p className="mt-3 text-sm text-muted-foreground">Menos suposições. Mais alinhamento com a oportunidade certa.</p></div><div className="mt-8 grid gap-5 md:grid-cols-3">{[{icon: FileText,title:"Adicione seu currículo",text:"Seu percurso, suas conquistas e a descrição da vaga que você quer conquistar."},{icon: ScanLine,title:"Descubra sua compatibilidade",text:"Veja seu score ATS, as palavras-chave presentes e os pontos que merecem atenção."},{icon: Sparkles,title:"Leve sua melhor versão",text:"Receba um currículo mais organizado, pronto para copiar ou exportar em PDF."}].map((step,i)=><article key={step.title} className="step-card"><div className="flex items-center justify-between"><span className="step-icon"><step.icon size={21}/></span><span className="text-xs font-semibold text-muted-foreground">0{i+1}</span></div><h3 className="mt-5 text-base font-bold">{step.title}</h3><p className="mt-3 text-xs leading-7 text-muted-foreground">{step.text}</p></article>)}</div><div className="mt-7"><IntegrityNote/></div></section></main></ResumeShell>;
 }
