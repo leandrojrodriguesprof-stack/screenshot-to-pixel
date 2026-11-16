@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Use browser-only deterministic keyword matching and whitespace-only resume normalization; this preserves source facts without sending personal information to a server.
+- Keep transient resume input and analysis in a root React context, never persistent browser storage; the pages share state without retaining personal data after closing.
+- Export PDF client-side with jsPDF; the download preserves the same normalized content shown in the result.

@@ -1,0 +1,11 @@
+import { Link } from "@tanstack/react-router";
+import { FileCheck2, ArrowUpRight, ShieldCheck, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { integrityMessage } from "@/lib/resume";
+import type { ReactNode } from "react";
+
+export function ResumeShell({ children }: { children: ReactNode }) {
+ return <><header className="site-header"><div className="page-width flex h-full items-center justify-between gap-4"><Link to="/" className="flex items-center gap-3" aria-label="ATS Resume Optimizer — início"><span className="brand-mark"><FileCheck2 size={23}/></span><span className="text-sm font-extrabold leading-tight">ATS Resume<span className="block text-xs font-medium text-muted-foreground">Optimizer</span></span></Link><nav className="flex items-center gap-7"><Button variant="ghost" asChild className="hidden sm:inline-flex"><Link to="/" hash="como-funciona">Como funciona</Link></Button><Button asChild><Link to="/analise">Analisar currículo <ArrowUpRight/></Link></Button></nav></div></header>{children}<footer className="site-footer"><div className="page-width flex flex-wrap items-center justify-between gap-3 py-6"><span>© 2026 ATS Resume Optimizer</span><span className="flex items-center gap-2"><ShieldCheck size={14}/> Sua experiência. Seu próximo passo.</span></div></footer></>;
+}
+export function IntegrityNote() { return <div className="integrity-note"><ShieldCheck size={21} className="mt-0.5 shrink-0 text-success"/><p>{integrityMessage}</p></div>; }
+export function PageSteps({ current }: { current: number }) { return <div className="mb-8 flex items-center gap-3 text-xs">{["Seus dados", "Análise ATS", "Currículo otimizado"].map((label,i)=><span key={label} className={`flex items-center gap-2 ${i <= current ? "text-primary" : "text-muted-foreground"}`}><span className="flex size-6 items-center justify-center rounded-full border border-current text-[10px] font-bold">{i+1}</span><span className="hidden sm:inline">{label}</span>{i<2&&<ArrowRight size={13} className="ml-2 text-muted-foreground"/>}</span>)}</div>; }
